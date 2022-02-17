@@ -1,0 +1,56 @@
+# set working directory - change this to the location where csv is saved
+setwd ("")
+
+
+
+# read in csv data
+temp_data = read.csv("fields.csv")
+
+
+
+# separate COMPLAB string into binary 1/0 variables
+# note: if 13 not equal to __ then set COMPLAB_ICD value
+temp_data$Precipitate.delivery = ifelse(substr(temp_data$COMPLAB,1,2) == "__", 0, 1)
+temp_data$Fetal.distress = ifelse(substr(temp_data$COMPLAB,3,4) == "__", 0, 1)
+temp_data$Prolapsed.cord = ifelse(substr(temp_data$COMPLAB,5,6) == "__", 0, 1)
+temp_data$Cord.tight.around.neck = ifelse(substr(temp_data$COMPLAB,7,8) == "__", 0, 1)
+temp_data$Cephalopelvic.disproportion = ifelse(substr(temp_data$COMPLAB,9,10) == "__", 0, 1)
+temp_data$PPH = ifelse(substr(temp_data$COMPLAB,11,12) == "__", 0, 1)
+temp_data$Retained.placenta = ifelse(substr(temp_data$COMPLAB,13,14) == "__", 0, 1)
+temp_data$Persisten.Occipito.Posterior = ifelse(substr(temp_data$COMPLAB,15,16) == "__", 0, 1)
+temp_data$Shoulder.dystocia = ifelse(substr(temp_data$COMPLAB,17,18) == "__", 0, 1)
+temp_data$Failure.to.progress.lte.3cms = ifelse(substr(temp_data$COMPLAB,19,20) == "__", 0, 1)
+temp_data$Failure.to.progress.gt.3cms = ifelse(substr(temp_data$COMPLAB,21,22) == "__", 0, 1)
+temp_data$Previous.caesarean.section = ifelse(substr(temp_data$COMPLAB,23,24) == "__", 0, 1)
+temp_data$COMPLAB.Other = ifelse(substr(temp_data$COMPLAB,25,26) == "__", 0, 1)
+#set ICD if applicable
+temp_data$COMPLAB.ICD = ifelse(substr(temp_data$COMPLAB,25,26) == "__","",substr(temp_data$COMPLAB,27,length(temp_data$COMPLAB)))
+
+
+
+# separate COMPRG string into binary 1/0 variables
+# note: if 10 not equal to __ then set COMPRG_ICD value
+temp_data$Threatened.abortions = ifelse(substr(temp_data$COMPRG,1,2) == "__", 0, 1)
+temp_data$Threatened.preterm.labour = ifelse(substr(temp_data$COMPRG,3,4) == "__", 0, 1)
+temp_data$Urinary.tract.infection = ifelse(substr(temp_data$COMPRG,5,6) == "__", 0, 1)
+temp_data$Pre.eclampsia = ifelse(substr(temp_data$COMPRG,7,8) == "__", 0, 1)
+temp_data$APH.placenta.praevia = ifelse(substr(temp_data$COMPRG,9,10) == "__", 0, 1)
+temp_data$APH.placental.abruption = ifelse(substr(temp_data$COMPRG,11,12) == "__", 0, 1)
+temp_data$APH.other = ifelse(substr(temp_data$COMPRG,13,14) == "__", 0, 1)
+temp_data$Prelabour.rupture.of.membrances = ifelse(substr(temp_data$COMPRG,15,16) == "__", 0, 1)
+temp_data$Gestational.diabetes = ifelse(substr(temp_data$COMPRG,17,18) == "__", 0, 1)
+temp_data$COMPRG.Other = ifelse(substr(temp_data$COMPRG,19,20) == "__", 0, 1)
+#set ICD if applicable
+temp_data$COMPRG.ICD = ifelse(substr(temp_data$COMPRG,19,20) == "__","",substr(temp_data$COMPRG,21,length(temp_data$COMPRG)))
+
+
+# separate MEDCOND string into binary 1/0 variables
+# note: if 5 not equal to __ then set MEDCOND_ICD value
+temp_data$Essential.hypertension = ifelse(substr(temp_data$MEDCOND,1,2) == "__", 0, 1)
+temp_data$Pre.existing.diabetes.mellitus = ifelse(substr(temp_data$MEDCOND,3,4) == "__", 0, 1)
+temp_data$Asthma = ifelse(substr(temp_data$MEDCOND,5,6) == "__", 0, 1)
+temp_data$Genital.herpes = ifelse(substr(temp_data$MEDCOND,7,8) == "__", 0, 1)
+temp_data$MEDCOND.Other = ifelse(substr(temp_data$MEDCOND,9,10) == "__", 0, 1)
+#set ICD if applicable
+temp_data$MEDCOND.ICD = ifelse(substr(temp_data$MEDCOND,9,10) == "__","",substr(temp_data$MEDCOND,11,length(temp_data$MEDCOND)))
+
